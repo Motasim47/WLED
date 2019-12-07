@@ -38,6 +38,7 @@
 #ifdef ESP8266
  #include <ESP8266WiFi.h>
  #include <ESP8266mDNS.h>
+ #include <time.h>
  #include <ESPAsyncTCP.h>
 #else
  #include <WiFi.h>
