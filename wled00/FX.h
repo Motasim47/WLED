@@ -170,7 +170,7 @@
 #define FX_MODE_TWINKLEFOX              80
 #define FX_MODE_TWINKLECAT              81
 #define FX_MODE_HALLOWEEN_EYES          82
-
+#define FX_MODE_SUNRISE                 83
 
 class WS2812FX {
   typedef uint16_t (WS2812FX::*mode_ptr)(void);
@@ -308,7 +308,8 @@ class WS2812FX {
       _mode[FX_MODE_TWINKLEFOX]              = &WS2812FX::mode_twinklefox;
       _mode[FX_MODE_TWINKLECAT]              = &WS2812FX::mode_twinklecat;
       _mode[FX_MODE_HALLOWEEN_EYES]          = &WS2812FX::mode_halloween_eyes;
-
+      _mode[FX_MODE_SUNRISE]                 = &WS2812FX::mode_sunrise;
+      
       _brightness = DEFAULT_BRIGHTNESS;
       currentPalette = CRGBPalette16(CRGB::Black);
       targetPalette = CloudColors_p;
@@ -482,6 +483,7 @@ class WS2812FX {
       mode_twinklefox(void),
       mode_twinklecat(void),
       mode_halloween_eyes(void);
+      mode_sunrise(void); 
 
   private:
     NeoPixelWrapper *bus;
@@ -552,7 +554,7 @@ const char JSON_mode_names[] PROGMEM = R"=====([
 "Out Out","Out In","Circus","Halloween","Tri Chase","Tri Wipe","Tri Fade","Lightning","ICU","Multi Comet",
 "Dual Scanner","Stream 2","Oscillate","Pride 2015","Juggle","Palette","Fire 2012","Colorwaves","BPM","Fill Noise",
 "Noise 1","Noise 2","Noise 3","Noise 4","Colortwinkles","Lake","Meteor","Smooth Meteor","Railway","Ripple",
-"Twinklefox","Twinklecat","Halloween Eyes"
+"Twinklefox","Twinklecat","Halloween Eyes", "sunrise" 
 ])=====";
 
 
