@@ -508,6 +508,49 @@ bool oappendi(int i)
   return oappend(s);
 }
 
+// RTC 
+#include <LiquidCrystal.h>
+#include "RTClib.h"
+
+bool sunrise alarm= false;
+
+RTC_DS1307 rtc;
+
+// the current time:
+const byte CurrentSecond = 11; 
+const byte CurrentMinute = 15; 
+const byte CurrentHoure = 12; 
+// the current date:
+const byte CurrentDay = 29; 
+const byte CurrentMonth = 12; 
+const byte CurrentYear = 19; 
+
+void setup()
+{
+  wledInit(); //boot starts here
+  
+  Serial.begin(9600);
+  
+  rtc.begin(); // initialize the RTC 24H format
+
+  rtc.setTime(CurrentHoure, CurrentMinute, CurrentSecond); // set current time
+  rtc.setDate(CurrentDay, CurrentMonth, CurrentYear); // set current month
+
+  rtc.setAlarmTime(18, 30, 10);  // set the alarm time
+  rtc.enableAlarm(rtc.MATCH_HHMMSS);
+ 
+  rtc.attachInterrupt(alarmMatch); // activated when the alarm time is the same as the current time
+
+}
+
+void loop()
+{
+  sunrise alarm= false;  
+}
+void alarmMatch() //alarMatch true, start the sunrise effect
+{
+  return sunrise alarm = true;  
+}
 
 //boot starts here
 void setup() {
