@@ -277,6 +277,30 @@ uint16_t WS2812FX::mode_breath(void) {
   return FRAMETIME;
 }
 
+/*
+ * Sunrise/sunset effect 
+ */
+
+uint16_t WS2812FX::mode_sunrise(bool sunrise)
+{
+
+    uint32_t cycleTime = 100 + (255 - SEGMENT.speed)*5;
+    uint32_t it = now / cycleTime;
+    uint32_t rem = now % cycleTime;
+    uint16_t fadedur = (cycleTime * SEGMENT.intensity) >> 2;      //fade duration
+    uint32_t fade = 255;
+  
+   setPixelColor(SEGMENT.start,0xFF3000);                         //the effect color, orange is chosen to simulate sunrise/sunset
+  
+    if (fadedur) 
+    {
+      fade = (rem * 255) / fadedur;
+      if (fade > 255) fade = 255;                                 //the brightness is scaled from 0 to 255
+    }
+  delay(100000); 
+  return FRAMETIME;
+
+}
 
 /*
  * Fades the LEDs between two colors
